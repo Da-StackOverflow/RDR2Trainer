@@ -206,135 +206,18 @@ namespace RDR2Trainer
 			return (ulong)ptr;
 		}
 
-		public static ulong V(long* ptr)
-		{
-			return (ulong)ptr;
-		}
-
-		public static ulong V(ulong* ptr)
-		{
-			return (ulong)ptr;
-		}
-
-		public static ulong V(int* ptr)
-		{
-			return (ulong)ptr;
-		}
-
-		public static ulong V(uint* ptr)
-		{
-			return (ulong)ptr;
-		}
-
-		public static ulong V(sbyte* ptr)
-		{
-			return (ulong)ptr;
-		}
-
-		public static ulong V(byte* ptr)
-		{
-			return (ulong)ptr;
-		}
-
-		public static ulong V(short* ptr)
-		{
-			return (ulong)ptr;
-		}
-
-		public static ulong V(ushort* ptr)
-		{
-			return (ulong)ptr;
-		}
-
-		public static ulong V(float* ptr)
-		{
-			return (ulong)ptr;
-		}
-
-		public static ulong V(double* ptr)
-		{
-			return (ulong)ptr;
-		}
-
-		public static ulong V(Vector3* ptr)
-		{
-			return (ulong)ptr;
-		}
-
-		public static ulong V(bool value)
-		{
-			return value ? 1ul : 0ul;
-		}
-
-		public static ulong V(long value)
-		{
-			return (ulong)value;
-		}
-
-		public static ulong V(ulong value)
-		{
-			return value;
-		}
-
-		public static ulong V(int value)
-		{
-			return (ulong)value;
-		}
-
-		public static ulong V(uint value)
-		{
-			return value;
-		}
-		public static ulong V(short value)
-		{
-			return (ulong)value;
-		}
-
-		public static ulong V(ushort value)
-		{
-			return value;
-		}
-
-		public static ulong V(byte value)
-		{
-			return value;
-		}
-
-		public static ulong V(sbyte value)
-		{
-			return (ulong)value;
-		}
-
-		public static ulong V(Vector3 value)
+		public static ulong V<T>(T value) where T : unmanaged
 		{
 			return *(ulong*)&value;
 		}
 
-		public static ulong V(double value)
-		{
-			return *(ulong*)&value;
-		}
-
-		public static ulong V(float value)
-		{
-			return *(ulong*)&value;
-		}
-
-		public static ulong V(string value, bool showAtScreen = true)
+		public static ulong V(string value, bool showAtScreen = false)
 		{
 			if (showAtScreen)
 			{
-				return _VarString(GetBytePtr(value));
+				return V(GetBytePtr(value));
 			}
-			return V(GetBytePtr(value));
-		}
-
-		public static ulong V(byte[] value)
-		{
-			fixed (byte* ptr = value)
-			{
-				return *(ulong*)ptr;
-			}
+			return _VarString(GetBytePtr(value));
 		}
 
 		public static void Invoke(ulong function, params ulong[] args)

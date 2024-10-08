@@ -122,7 +122,7 @@ namespace RDR2Trainer
 		// Note: you must use VAR_STRING
 		public static void BG_DISPLAY_TEXT(string text, float x, float y)
 		{
-			Invoke(0x16794E044C9EFB58, V(text), V(x), V(y));
+			Invoke(0x16794E044C9EFB58, V(text, true), V(x), V(y));
 		}
 
 		public static void BG_SET_TEXT_SCALE(float scaleX, float scaleY) { Invoke(0xA1253A3C870B6843, V(scaleX), V(scaleY)); }
@@ -160,7 +160,7 @@ namespace RDR2Trainer
 
 		// Computes a hash for the given string. It is hashed using Jenkins' One-at-a-Time hash algorithm (https://en.wikipedia.org/wiki/Jenkins_hash_function)
 		// Note: this implementation is case-insensitive.
-		public static uint GET_HASH_KEY(string model) { return Invoke<uint>(0xFD340785ADF8CFB7, V(model, false)); }
+		public static uint GET_HASH_KEY(string model) { return Invoke<uint>(0xFD340785ADF8CFB7, V(model)); }
 
 		// Returns whether the specified model exists in the game.
 		public static bool IS_MODEL_IN_CDIMAGE(uint model) { return Invoke<bool>(0xD6F3B6D7716CFF8E, V(model)); }
@@ -258,7 +258,7 @@ namespace RDR2Trainer
 		// This function sets metadata of type bool to specified entity.
 		public static bool DECOR_SET_BOOL(int entity, string propertyName, bool value)
 		{
-			return Invoke<bool>(0xFE26E4609B1C3772, V(entity), V(propertyName, false), V(value));
+			return Invoke<bool>(0xFE26E4609B1C3772, V(entity), V(propertyName), V(value));
 		}
 
 		public static bool SET_VEHICLE_ON_GROUND_PROPERLY(int vehicle, bool p1) { return Invoke<bool>(0x7263332501E07F52, V(vehicle), V(p1)); }
@@ -367,7 +367,7 @@ namespace RDR2Trainer
 		public static void HIDE_HUD_AND_RADAR_THIS_FRAME() { Invoke(0x36CDD81627A6FCD2); }
 
 		// Sets property to int.
-		public static bool DECOR_SET_INT(int entity, string propertyName, int value) { return Invoke<bool>(0xE88F4D7F52A6090F, V(entity), V(propertyName, false), V(value)); }
+		public static bool DECOR_SET_INT(int entity, string propertyName, int value) { return Invoke<bool>(0xE88F4D7F52A6090F, V(entity), V(propertyName), V(value)); }
 
 		public static void TASK_COMBAT_PED(int ped, int targetint, int p2, int p3) { Invoke(0xF166E48407BAC484, V(ped), V(targetint), V(p2), V(p3)); }
 
