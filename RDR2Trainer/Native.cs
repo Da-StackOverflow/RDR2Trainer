@@ -337,134 +337,29 @@ namespace RDR2Trainer
 			}
 		}
 
-		public static void VoidInvoke(ulong function, params ulong[] args)
-		{
-			ULongPointerInvoke(function, args);
-		}
-
-		public static ulong ULongInvoke(ulong function, params ulong[] args)
-		{
-			return *ULongPointerInvoke(function, args);
-		}
-
-		public static long LongInvoke(ulong function, params ulong[] args)
-		{
-			return (long)*ULongPointerInvoke(function, args);
-		}
-
-		public static uint UIntInvoke(ulong function, params ulong[] args)
-		{
-			return (uint)*ULongPointerInvoke(function, args);
-		}
-
-		public static int IntInvoke(ulong function, params ulong[] args)
-		{
-			return (int)*ULongPointerInvoke(function, args);
-		}
-
-		public static ushort UShortInvoke(ulong function, params ulong[] args)
-		{
-			return (ushort)*ULongPointerInvoke(function, args);
-		}
-
-		public static short ShortInvoke(ulong function, params ulong[] args)
-		{
-			return (short)*ULongPointerInvoke(function, args);
-		}
-
-		public static byte ByteInvoke(ulong function, params ulong[] args)
-		{
-			return (byte)*ULongPointerInvoke(function, args);
-		}
-
-		public static sbyte SByteInvoke(ulong function, params ulong[] args)
-		{
-			return (sbyte)*ULongPointerInvoke(function, args);
-		}
-
-		public static bool BoolInvoke(ulong function, params ulong[] args)
-		{
-			return *ULongPointerInvoke(function, args) != 0ul;
-		}
-
-		public static float FloatInvoke(ulong function, params ulong[] args)
-		{
-			return *(float*)ULongPointerInvoke(function, args);
-		}
-
-		public static double DoubleInvoke(ulong function, params ulong[] args)
-		{
-			return *(double*)ULongPointerInvoke(function, args);
-		}
-
-		public static Vector3 Vector3Invoke(ulong function, params ulong[] args)
-		{
-			return new Vector3(ULongPointerInvoke(function, args));
-		}
-
-		public static void* PointerInvoke(ulong function, params ulong[] args)
-		{
-			return ULongPointerInvoke(function, args);
-		}
-
-		public static ulong* ULongPointerInvoke(ulong function, params ulong[] args)
+		public static void Invoke(ulong function, params ulong[] args)
 		{
 			_InitFunc(function);
 			for (int i = 0; i < args.Length; i++)
 			{
 				_PushArg(args[i]);
 			}
-			return _Invoke();
+			_Invoke();
 		}
 
-		public static long* LongPointerInvoke(ulong function, params ulong[] args)
+		public static T* PInvoke<T>(ulong function, params ulong[] args) where T : unmanaged
 		{
-			return (long*)ULongPointerInvoke(function, args);
+			_InitFunc(function);
+			for (int i = 0; i < args.Length; i++)
+			{
+				_PushArg(args[i]);
+			}
+			return (T*)_Invoke();
 		}
 
-		public static int* IntPointerInvoke(ulong function, params ulong[] args)
+		public static T Invoke<T>(ulong function, params ulong[] args) where T : unmanaged
 		{
-			return (int*)ULongPointerInvoke(function, args);
-		}
-
-		public static uint* UIntPointerInvoke(ulong function, params ulong[] args)
-		{
-			return (uint*)ULongPointerInvoke(function, args);
-		}
-
-		public static short* ShortPointerInvoke(ulong function, params ulong[] args)
-		{
-			return (short*)ULongPointerInvoke(function, args);
-		}
-
-		public static ushort* UShortPointerInvoke(ulong function, params ulong[] args)
-		{
-			return (ushort*)ULongPointerInvoke(function, args);
-		}
-
-		public static byte* BytePointerInvoke(ulong function, params ulong[] args)
-		{
-			return (byte*)ULongPointerInvoke(function, args);
-		}
-
-		public static sbyte* SbytePointerInvoke(ulong function, params ulong[] args)
-		{
-			return (sbyte*)ULongPointerInvoke(function, args);
-		}
-
-		public static float* FloatPointerInvoke(ulong function, params ulong[] args)
-		{
-			return (float*)ULongPointerInvoke(function, args);
-		}
-
-		public static double* DoublePointerInvoke(ulong function, params ulong[] args)
-		{
-			return (double*)ULongPointerInvoke(function, args);
-		}
-
-		public static Vector3* Vector3PointerInvoke(ulong function, params ulong[] args)
-		{
-			return (Vector3*)ULongPointerInvoke(function, args);
+			return *PInvoke<T>(function, args);
 		}
 	}
 }
