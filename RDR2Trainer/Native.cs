@@ -215,9 +215,9 @@ namespace RDR2Trainer
 		{
 			if (showAtScreen)
 			{
-				return V(GetBytePtr(value));
+				return _VarString(GetBytePtr(value));
 			}
-			return _VarString(GetBytePtr(value));
+			return V(GetBytePtr(value));
 		}
 
 		public static void Invoke(ulong function, params ulong[] args)
